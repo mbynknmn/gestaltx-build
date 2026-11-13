@@ -27,8 +27,23 @@ static BOOL GXWithTemporaryCacheLinkUnlocked(NSURL *caches, NSString *target,
     NSURL *backup = [caches.URLByDeletingLastPathComponent URLByAppendingPathComponent:
                      [NSString stringWithFormat:@".GestaltX-Caches-%@.backup", NSUUID.UUID.UUIDString]];
     if (existed && rename(caches.fileSystemRepresentation, backup.fileSystemRepresentation) != 0) {
-        if (error) *error = GXCacheError(errno, backup);
-        return NO;
+        // Some app containers deny renaming a directory outright (EPERM). Fall
+        // back to emptying it and removing it, then linking the target in place.
+        NSError *listError = nil;
+        NSArray<NSString *> *items = [files contentsOfDirectoryAtPath:caches.path error:&listError];
+        if (listError) {
+            if (error) *error = GXCacheError(errno, backup);
+            return NO;
+        }
+        for (NSString *item in items) {
+            NSURL *child = [caches URLByAppendingPathComponent:item];
+            [files removeItemAtURL:child error:nil];
+        }
+        if (rmdir(caches.fileSystemRepresentation) != 0) {
+            if (error) *error = GXCacheError(errno, backup);
+            return NO;
+        }
+        existed = NO;
     }
 
     NSError *setupError = nil;
