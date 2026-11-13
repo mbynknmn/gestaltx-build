@@ -84,9 +84,9 @@ int64_t worse_query(NSString *target, NSString *group, bool alt_flags, bool crea
     NSURL *groupRoot = group.length ? [files containerURLForSecurityApplicationGroupIdentifier: group] : nil;
     BOOL ownContainer = NO;
     if (!groupRoot) {
-        groupRoot = [files URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask].firstObject;
+        groupRoot = [files URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
         ownContainer = groupRoot != nil;
-        wq_log(@"App Group unavailable; own-container fallback: %@", groupRoot.path ?: @"nil");
+        wq_log(@"App Group unavailable; own-container fallback (Documents): %@", groupRoot.path ?: @"nil");
     } else {
         wq_log(@"App Group resolved");
     }
@@ -143,7 +143,8 @@ int64_t worse_query(NSString *target, NSString *group, bool alt_flags, bool crea
         query_set_group_identifiers(query, identifier);
         wq_log(@"Query configured: class=7 identifier=%@", group);
     }
-    query_set_part(query, 3); // The query's part sets our base path, part 3 is Library/Caches
+    // part selects the base path inside the container: 3 = Library/Caches, 1 = Documents.
+    query_set_part(query, ownContainer ? 1 : 3);
     if (alt_flags) {
         query_set_flags(query, 0x0000000800000000ULL); // Accessing App Group containers on iOS 26.x needs different flags, for whatever reason
     } else {
