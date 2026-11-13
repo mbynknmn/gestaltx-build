@@ -68,11 +68,11 @@ final class GestaltManager: ObservableObject {
                 if handle >= 0 { return handle }
                 rejection = handle
             }
+            let reason = worse_query_last_error() ?? ""
             if rejection == -4 {
-                let detail = worse_query_last_error() ?? "unknown"
-                throw GestaltFailure("The exploit could not swap Library/Caches: " + detail)
+                throw GestaltFailure("Swap failed: " + (reason.isEmpty ? "unknown" : reason))
             }
-            throw GestaltFailure("MobileGestalt access was denied. Check the OS version and how the app was signed.")
+            throw GestaltFailure("Access denied (code \(rejection)). " + reason)
             #endif
         }, release: { worse_query_release($0) }, eventSink: { text in
             NotificationCenter.default.post(name: Notification.Name("GestaltX.worse_query.log"), object: nil,
