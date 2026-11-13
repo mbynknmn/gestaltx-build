@@ -1,0 +1,27 @@
+build/
+.DS_Store
+xcuserdata/
+*.xcuserstate
+*.ipa
+*.p12
+*.mobileprovision
+*.p8
+*.cer
+*.certSigningRequest
+*.provisionprofile
+Signing.local.xcconfig
+.signing/
+.codex/
+.agents/
+.claude/
+.planning/
+AGENTS.md
+task_plan.md
+progress.md
+findings.md
+docs/plans/
+.env
+.env.*
+
+# Swift package compiler index output
+GestaltX.xcodeproj/-Xcc/

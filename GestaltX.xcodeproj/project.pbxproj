@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 110;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A11800000000000000000001 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = A11800000000000000000003 /* ZIPFoundation */; };
+		4590AC67EAB2441BAD0E6ED1 /* ItemProviderLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C01D754C14C8B9BB28F96 /* ItemProviderLoad.swift */; };
+		0984A2204DCE106EB57ABBA5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C4D44512A7F31C4F05AD18C7 /* Localizable.xcstrings */; };
+		2A78BFEA3F79682B43C6174D /* GestaltXShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9EABFACA1DBDA148BE33107B /* GestaltXShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4DD89F9BEC1BCAEA76190943 /* GXEntitlementsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B26403D3B2CF0AF602120A /* GXEntitlementsReader.m */; };
+		62ED10EDA2F9C8B69DEC64B2 /* SharedPlistInbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A3FA0033C5ECD3A1B95B1 /* SharedPlistInbox.swift */; };
+		67975CDCBA5A29222352F292 /* SharedPlistInbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86A3FA0033C5ECD3A1B95B1 /* SharedPlistInbox.swift */; };
+		7D7396741BEF3E946DADCBBA /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF236E708DA867CE2ABD1DD3 /* ShareViewController.swift */; };
+		A0D119FCB3963A4F9C1EAF17 /* SharedAppGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CE69FA6A4B81D2287B60D1 /* SharedAppGroups.swift */; };
+		C0E60E90A46F41C928987332 /* SharedAppGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CE69FA6A4B81D2287B60D1 /* SharedAppGroups.swift */; };
+		D57FEACAB810D3AA8EDA8E33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 650DA52892F36D0BD4701C9E /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F569702176BDA756E86027C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3657C2D1303730E800908AE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E14645B6DD100C2080D40483;
+			remoteInfo = GestaltXShare;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		98A5C44E6AFCF8251EFB9837 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2A78BFEA3F79682B43C6174D /* GestaltXShare.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1E4C01D754C14C8B9BB28F96 /* ItemProviderLoad.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ItemProviderLoad.swift; sourceTree = "<group>"; };
+		2EF2633193BB80FFC35C8F39 /* App-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; sourceTree = "<group>"; };
+		3657C2D9303730E800908AE2 /* GestaltX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GestaltX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		46D0711BAB4A7CD14E7A3BEE /* ShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ShareExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		650DA52892F36D0BD4701C9E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		9EABFACA1DBDA148BE33107B /* GestaltXShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GestaltXShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1AF8FCEFCC842955E10C577 /* GestaltXShare.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = GestaltXShare.entitlements; sourceTree = "<group>"; };
+		B86A3FA0033C5ECD3A1B95B1 /* SharedPlistInbox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedPlistInbox.swift; sourceTree = "<group>"; };
+		C4D44512A7F31C4F05AD18C7 /* Localizable.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; name = Localizable.xcstrings; path = ../GestaltX/Localizable.xcstrings; sourceTree = "<group>"; };
+		CF236E708DA867CE2ABD1DD3 /* ShareViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		D4B26403D3B2CF0AF602120A /* GXEntitlementsReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GXEntitlementsReader.m; path = ../GestaltX/GXEntitlementsReader.m; sourceTree = "<group>"; };
+		D4CE69FA6A4B81D2287B60D1 /* SharedAppGroups.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedAppGroups.swift; sourceTree = "<group>"; };
+		D8F975A2C87AA5E090A58F7F /* GXEntitlementsReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GXEntitlementsReader.h; path = ../GestaltX/GXEntitlementsReader.h; sourceTree = "<group>"; };
+		E1681AAB87AE6E250D09FCD4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3657C2DB303730E800908AE2 /* GestaltX */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = GestaltX;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3657C2D6303730E800908AE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				A11800000000000000000001 /* ZIPFoundation in Frameworks */,
+			);
+		};
+		8EAD853B7894F8DE4CBFB3D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D57FEACAB810D3AA8EDA8E33 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04235207F8C07749339C8AFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7FF6AC4315CCDDE91C0CE537 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		114E4B0927714FB5809477BA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B86A3FA0033C5ECD3A1B95B1 /* SharedPlistInbox.swift */,
+				D4CE69FA6A4B81D2287B60D1 /* SharedAppGroups.swift */,
+				D4B26403D3B2CF0AF602120A /* GXEntitlementsReader.m */,
+				D8F975A2C87AA5E090A58F7F /* GXEntitlementsReader.h */,
+				C4D44512A7F31C4F05AD18C7 /* Localizable.xcstrings */,
+			);
+			name = Shared;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		3657C2D0303730E800908AE2 = {
+			isa = PBXGroup;
+			children = (
+				3657C2DB303730E800908AE2 /* GestaltX */,
+				3657C2DA303730E800908AE2 /* Products */,
+				04235207F8C07749339C8AFE /* Frameworks */,
+				114E4B0927714FB5809477BA /* Shared */,
+				549A67A15B582DE039CCAEE7 /* ShareExtension */,
+				D0ECEAEAA02D01A984128CA5 /* Configuration */,
+			);
+			sourceTree = "<group>";
+		};
+		3657C2DA303730E800908AE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3657C2D9303730E800908AE2 /* GestaltX.app */,
+				9EABFACA1DBDA148BE33107B /* GestaltXShare.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		549A67A15B582DE039CCAEE7 /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				1E4C01D754C14C8B9BB28F96 /* ItemProviderLoad.swift */,
+				CF236E708DA867CE2ABD1DD3 /* ShareViewController.swift */,
+				E1681AAB87AE6E250D09FCD4 /* Info.plist */,
+				A1AF8FCEFCC842955E10C577 /* GestaltXShare.entitlements */,
+				46D0711BAB4A7CD14E7A3BEE /* ShareExtension-Bridging-Header.h */,
+			);
+			name = ShareExtension;
+			path = ShareExtension;
+			sourceTree = "<group>";
+		};
+		7FF6AC4315CCDDE91C0CE537 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				650DA52892F36D0BD4701C9E /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D0ECEAEAA02D01A984128CA5 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				2EF2633193BB80FFC35C8F39 /* App-Info.plist */,
+			);
+			name = Configuration;
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3657C2D8303730E800908AE2 /* GestaltX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3657C2E4303730E900908AE2 /* Build configuration list for PBXNativeTarget "GestaltX" */;
+			buildPhases = (
+				3657C2D5303730E800908AE2 /* Sources */,
+				3657C2D6303730E800908AE2 /* Frameworks */,
+				3657C2D7303730E800908AE2 /* Resources */,
+				98A5C44E6AFCF8251EFB9837 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				207B17830B74CE408FA240C3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3657C2DB303730E800908AE2 /* GestaltX */,
+			);
+			packageProductDependencies = (A11800000000000000000003 /* ZIPFoundation */, );
+			name = GestaltX;
+			productName = GestaltX;
+			productReference = 3657C2D9303730E800908AE2 /* GestaltX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E14645B6DD100C2080D40483 /* GestaltXShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40BB2C886A39AE64DC417EB1 /* Build configuration list for PBXNativeTarget "GestaltXShare" */;
+			buildPhases = (
+				C2F45E1AD284FDDEE3DC0E3F /* Sources */,
+				8EAD853B7894F8DE4CBFB3D3 /* Frameworks */,
+				30A1930077B9FC57AC0150AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GestaltXShare;
+			productName = GestaltXShare;
+			productReference = 9EABFACA1DBDA148BE33107B /* GestaltXShare.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3657C2D1303730E800908AE2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					3657C2D8303730E800908AE2 = {
+						CreatedOnToolsVersion = 27.0;
+						LastSwiftMigration = 2700;
+					};
+				};
+			};
+			buildConfigurationList = 3657C2D4303730E800908AE2 /* Build configuration list for PBXProject "GestaltX" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"zh-Hans",
+				"zh-Hant-TW",
+				"zh-Hant-HK",
+				vi,
+				ru,
+				fa,
+				ko,
+				es,
+				ja,
+				Base,
+			);
+			mainGroup = 3657C2D0303730E800908AE2;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (A11800000000000000000002 /* ZIPFoundation */, );
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3657C2DA303730E800908AE2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3657C2D8303730E800908AE2 /* GestaltX */,
+				E14645B6DD100C2080D40483 /* GestaltXShare */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30A1930077B9FC57AC0150AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0984A2204DCE106EB57ABBA5 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3657C2D7303730E800908AE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3657C2D5303730E800908AE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+				67975CDCBA5A29222352F292 /* SharedPlistInbox.swift in Sources */,
+				A0D119FCB3963A4F9C1EAF17 /* SharedAppGroups.swift in Sources */,
+			);
+		};
+		C2F45E1AD284FDDEE3DC0E3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4590AC67EAB2441BAD0E6ED1 /* ItemProviderLoad.swift in Sources */,
+				62ED10EDA2F9C8B69DEC64B2 /* SharedPlistInbox.swift in Sources */,
+				C0E60E90A46F41C928987332 /* SharedAppGroups.swift in Sources */,
+				4DD89F9BEC1BCAEA76190943 /* GXEntitlementsReader.m in Sources */,
+				7D7396741BEF3E946DADCBBA /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		207B17830B74CE408FA240C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GestaltXShare;
+			target = E14645B6DD100C2080D40483 /* GestaltXShare */;
+			targetProxy = F569702176BDA756E86027C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+        A11800000000000000000002 /* ZIPFoundation */ = {isa = XCRemoteSwiftPackageReference; repositoryURL = "https://github.com/weichsel/ZIPFoundation.git"; requirement = {kind = exactVersion; version = 0.9.20; }; };
+/* End XCRemoteSwiftPackageReference section */
+/* Begin XCSwiftPackageProductDependency section */
+        A11800000000000000000003 /* ZIPFoundation */ = {isa = XCSwiftPackageProductDependency; package = A11800000000000000000002 /* ZIPFoundation */; productName = ZIPFoundation; };
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3657C2E2303730E900908AE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3657C2E3303730E900908AE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3657C2E5303730E900908AE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GestaltX/GestaltX.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11130112;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Configuration/App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = GestaltX;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huami.gestultx;
+				PRODUCT_NAME = GestaltX;
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "GestaltX/GestaltX-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		3657C2E6303730E900908AE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = GestaltX/GestaltX.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11130112;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Configuration/App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = GestaltX;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huami.gestultx;
+				PRODUCT_NAME = GestaltX;
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "GestaltX/GestaltX-Bridging-Header.h";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		55314E5C02E742C20887DADE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/GestaltXShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11130112;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huami.gestultx.ShareExtension;
+				PRODUCT_NAME = GestaltXShare;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareExtension/ShareExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		763BA09F7468BF8BA39CFCD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/GestaltXShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 11130112;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.huami.gestultx.ShareExtension;
+				PRODUCT_NAME = GestaltXShare;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareExtension/ShareExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3657C2D4303730E800908AE2 /* Build configuration list for PBXProject "GestaltX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3657C2E2303730E900908AE2 /* Debug */,
+				3657C2E3303730E900908AE2 /* Release */,
+			);
+			defaultConfigurationName = Release;
+		};
+		3657C2E4303730E900908AE2 /* Build configuration list for PBXNativeTarget "GestaltX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3657C2E5303730E900908AE2 /* Debug */,
+				3657C2E6303730E900908AE2 /* Release */,
+			);
+			defaultConfigurationName = Release;
+		};
+		40BB2C886A39AE64DC417EB1 /* Build configuration list for PBXNativeTarget "GestaltXShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55314E5C02E742C20887DADE /* Release */,
+				763BA09F7468BF8BA39CFCD2 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3657C2D1303730E800908AE2 /* Project object */;
+}

@@ -1,0 +1,104 @@
+name: Build IPA
+
+# Builds an ad-hoc signed IPA for every push to main, pull request, version
+# tag, release, and manual dispatch. The IPA keeps the App Group entitlements
+# of the app and its share extension, so AltStore and SideStore can register
+# the group when they re-sign it.
+#
+# Every run uploads the IPA as a workflow artifact. Tag and release runs also
+# attach it to the matching GitHub release, replacing an asset with the same
+# name.
+
+on:
+  release:
+    types: [published]
+  push:
+    branches: [main]
+    tags:
+      - "v*"
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch, tag, or commit to build
+        type: string
+        default: main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-ipa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 40
+    env:
+      REF: ${{ github.event.release.tag_name || inputs.ref || github.ref }}
+      TAG: ${{ github.event.release.tag_name || (startsWith(github.ref, 'refs/tags/') && github.ref_name) || '' }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ env.REF }}
+          fetch-depth: 0
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Use the current build script for old tags
+        # Tags made before this workflow existed have no build script.
+        if: env.TAG != ''
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git fetch --depth=1 origin "$DEFAULT_BRANCH"
+          git checkout FETCH_HEAD -- .github/scripts/build-ipa.sh
+
+      - name: Build IPA
+        id: build
+        run: |
+          export BUILD_DATE="$(date -u +%F)"
+          .github/scripts/build-ipa.sh "$RUNNER_TEMP/ipa"
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: GestaltX-${{ steps.build.outputs.version }}
+          path: ${{ steps.build.outputs.ipa }}
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish release assets
+        if: env.TAG != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IPA: ${{ steps.build.outputs.ipa }}
+        run: |
+          version="${TAG#v}"
+          notes="$RUNNER_TEMP/release-notes.md"
+          : > "$notes"
+          printf 'English | [简体中文](https://github.com/huamidev/GestaltX/blob/%s/CHANGELOG_ZH-CN.md)\n\n' "$TAG" > "$notes"
+          if [[ -f CHANGELOG.md ]]; then
+            awk -v ver="$version" '
+              $0 ~ "^## \\[" ver "\\]" { found = 1; next }
+              found && /^## \[/ { exit }
+              found { if (!started && $0 == "") next; started = 1; print }
+            ' CHANGELOG.md >> "$notes"
+          fi
+          if ! grep -q '^### ' "$notes"; then
+            printf 'GestaltX %s\n' "$TAG" >> "$notes"
+          fi
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --verify-tag \
+              --title "GestaltX $TAG" --notes-file "$notes"
+          fi
+          assets=("$IPA")
+          [[ -f CHANGELOG.md ]] && assets+=("CHANGELOG.md")
+          [[ -f CHANGELOG_ZH-CN.md ]] && assets+=("CHANGELOG_ZH-CN.md")
+          gh release upload "$TAG" "${assets[@]}" --clobber
