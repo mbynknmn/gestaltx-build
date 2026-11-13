@@ -72,22 +72,29 @@ bundles+=("$app")
 python3 - "${bundles[@]}" <<'VERIFY_ENTITLEMENTS'
 import plistlib, subprocess, sys
 common = None
+saw_groups = False
 for bundle in sys.argv[1:]:
     subprocess.run(["codesign", "--verify", "--strict", bundle], check=True)
     result = subprocess.run(["codesign", "-d", "--entitlements", "-", "--xml", bundle], capture_output=True, check=True)
     entitlements = plistlib.loads(result.stdout)
     groups = entitlements.get("com.apple.security.application-groups", [])
-    if not isinstance(groups, list) or not groups or not all(isinstance(group, str) and group for group in groups):
-        raise SystemExit("Missing usable App Group entitlements in a signed bundle")
+    if groups:
+        saw_groups = True
+        if not isinstance(groups, list) or not all(isinstance(group, str) and group for group in groups):
+            raise SystemExit("Malformed App Group entitlements in a signed bundle")
+        common = set(groups) if common is None else common.intersection(groups)
     if entitlements.get("com.apple.developer.team-identifier"):
         raise SystemExit("A developer Team ID must not be embedded in the ad-hoc package")
     metadata = subprocess.run(["codesign", "-dvv", bundle], capture_output=True, text=True, check=True).stderr
     if "Signature=adhoc" not in metadata or "TeamIdentifier=not set" not in metadata:
         raise SystemExit("Expected an ad-hoc signature without a developer identity")
     common = set(groups) if common is None else common.intersection(groups)
-if not common:
+if saw_groups and not common:
     raise SystemExit("The app and share extension do not have a common App Group")
-print("App and embedded extensions retain common App Groups with ad-hoc signatures.")
+if saw_groups:
+    print("App and embedded extensions retain common App Groups with ad-hoc signatures.")
+else:
+    print("Signed without App Groups (own-container fallback build).")
 VERIFY_ENTITLEMENTS
 
 ipa="$out/GestaltX_$version.ipa"
