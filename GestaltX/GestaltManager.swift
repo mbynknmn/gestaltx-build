@@ -69,7 +69,8 @@ final class GestaltManager: ObservableObject {
                 rejection = handle
             }
             if rejection == -4 {
-                throw GestaltFailure("The exploit could not swap Library/Caches. Check free storage and retry.")
+                let detail = worse_query_last_error() ?? "unknown"
+                throw GestaltFailure("The exploit could not swap Library/Caches: " + detail)
             }
             throw GestaltFailure("MobileGestalt access was denied. Check the OS version and how the app was signed.")
             #endif

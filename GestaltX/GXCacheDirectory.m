@@ -2,16 +2,22 @@
 #import "GXCacheDirectory.h"
 #include <sys/stat.h>
 #include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
 static NSError *GXCacheError(int code, NSURL *url) {
     return [NSError errorWithDomain:NSPOSIXErrorDomain code:code
-                           userInfo:@{NSFilePathErrorKey: url.path}];
+                           userInfo:@{NSFilePathErrorKey: url.path,
+                                      NSLocalizedDescriptionKey:
+                                          [NSString stringWithFormat:@"%s (errno %d) at %@",
+                                           strerror(code), code, url.path]}];
 }
 
 static BOOL GXWithTemporaryCacheLinkUnlocked(NSURL *caches, NSString *target,
                               int64_t (^operation)(void), int64_t *result,
                               NSError **error) {
     NSFileManager *files = NSFileManager.defaultManager;
+    (void)files;
     struct stat original;
     BOOL existed = lstat(caches.fileSystemRepresentation, &original) == 0;
     if (!existed && errno != ENOENT) {
@@ -20,10 +26,14 @@ static BOOL GXWithTemporaryCacheLinkUnlocked(NSURL *caches, NSString *target,
     }
     NSURL *backup = [caches.URLByDeletingLastPathComponent URLByAppendingPathComponent:
                      [NSString stringWithFormat:@".GestaltX-Caches-%@.backup", NSUUID.UUID.UUIDString]];
-    if (existed && ![files moveItemAtURL:caches toURL:backup error:error]) return NO;
+    if (existed && rename(caches.fileSystemRepresentation, backup.fileSystemRepresentation) != 0) {
+        if (error) *error = GXCacheError(errno, backup);
+        return NO;
+    }
 
     NSError *setupError = nil;
-    BOOL installed = [files createSymbolicLinkAtPath:caches.path withDestinationPath:target error:&setupError];
+    BOOL installed = symlink(target.fileSystemRepresentation, caches.fileSystemRepresentation) == 0;
+    if (!installed) setupError = GXCacheError(errno, caches);
     struct stat installedLink;
     BOOL identified = NO;
     if (installed) {
@@ -50,7 +60,8 @@ static BOOL GXWithTemporaryCacheLinkUnlocked(NSURL *caches, NSString *target,
                     restoreError = GXCacheError(EBUSY, backup);
                     canRestore = NO;
                 } else {
-                    canRestore = [files removeItemAtURL:caches error:&restoreError];
+                    canRestore = unlink(caches.fileSystemRepresentation) == 0;
+                    if (!canRestore) restoreError = GXCacheError(errno, caches);
                 }
             } else if (errno != ENOENT) {
                 restoreError = GXCacheError(errno, caches);
@@ -58,9 +69,13 @@ static BOOL GXWithTemporaryCacheLinkUnlocked(NSURL *caches, NSString *target,
             }
         }
         if (canRestore && existed) {
-            [files moveItemAtURL:backup toURL:caches error:&restoreError];
+            if (rename(backup.fileSystemRepresentation, caches.fileSystemRepresentation) != 0) {
+                restoreError = GXCacheError(errno, caches);
+            }
         } else if (canRestore && installed) {
-            [files createDirectoryAtURL:caches withIntermediateDirectories:NO attributes:nil error:&restoreError];
+            if (mkdir(caches.fileSystemRepresentation, 0755) != 0) {
+                restoreError = GXCacheError(errno, caches);
+            }
         }
     }
     if (error) *error = restoreError ?: setupError;

@@ -57,8 +57,13 @@ static void wq_log(NSString *format, ...) {
                                                       object:nil userInfo:@{@"message": message}];
 }
 
+// Last failure reason, surfaced to the UI so the exact errno is visible.
+static NSString *gWQLastError = nil;
+NSString *worse_query_last_error(void) { return gWQLastError; }
+
 // So, who's ready for round two?
 int64_t worse_query(NSString *target, NSString *group, bool alt_flags, bool create_dir) {
+    gWQLastError = nil;
     wq_log(@"Begin: target=%@ group=%@ alt_flags=%d create_dir=%d", target, group, alt_flags, create_dir);
     // Check if the target exists
     if (!create_dir) {
@@ -174,6 +179,7 @@ int64_t worse_query(NSString *target, NSString *group, bool alt_flags, bool crea
     dlclose(mgr);
     if (!restored) {
         if (handle >= 0) worse_query_release(handle);
+        gWQLastError = cacheError.localizedDescription ?: @"unknown failure";
         wq_log(@"Caches setup or restoration failed: %@, return=-4", cacheError.localizedDescription);
         return -4;
     }

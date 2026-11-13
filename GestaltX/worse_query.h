@@ -32,5 +32,6 @@
 
 int64_t worse_query(NSString *path, NSString *group, bool alt_flags, bool create_dir);
 void worse_query_release(int64_t handle);
+NSString *_Nullable worse_query_last_error(void);
 
 #endif /* worse_query_h */
