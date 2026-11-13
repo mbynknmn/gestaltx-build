@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 110;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -212,7 +212,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2700;
-				LastUpgradeCheck = 2700;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					3657C2D8303730E800908AE2 = {
 						CreatedOnToolsVersion = 27.0;
